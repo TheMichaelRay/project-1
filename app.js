@@ -13,9 +13,19 @@ game = {
   },
   currentPlayer: null,
   mark: null,
+  functions: {
+    switchPlayer: function(){
+      if (game.currentPlayer == game.player1) {
+        game.currentPlayer = game.player2;
+      } else if (game.currentPlayer == game.player2){
+        game.currentPlayer = game.player1;
+      }
+    }
+  },
   init: function(){
           this.currentPlayer = game.player1;
           this.mark = game.currentPlayer.class;
+          // builds the game board
           for (var i=0; i<game.board.rows; i++) {
             for (var u=0; u<game.board.columns; u++) {
               document.querySelector('#container').innerHTML += '<div class="box"></div>'
@@ -28,6 +38,7 @@ game = {
             if (!$(this).hasClass('red') && !$(this).hasClass('black')) {
               console.log("boom");
               $(this).addClass(game.currentPlayer.class);
+              game.functions.switchPlayer()
             }
           });
   },

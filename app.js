@@ -23,15 +23,15 @@ game = {
     },
     // function to determine whether a player can make a given move or not
     move: function(){
-            var circle = $(this);
-            if (!$(this).hasClass('red') &&
-                !$(this).hasClass('black') )
-                 {
-                // check that this doesnt have a class of black or red.
-                // check that this either doesnt have a square below it
-                // or that the square below it has a class of red or black
-                // () {
-              console.log(circle.parent().next().children()[circle.index()]);
+            // var circle = $(this);
+            var $down = $(this).parent().next().children()[$(this).index()];
+            if (!$(this).hasClass(game.player1.class) &&
+                !$(this).hasClass(game.player2.class) &&
+                (!$down ||
+                  $($down).hasClass(game.player1.class) ||
+                  $($down).hasClass(game.player2.class))
+                ) {
+              console.log($(this).parent().next().children()[$(this).index()]);
               $(this).addClass(game.currentPlayer.class);
               game.functions.switchPlayer()
             }

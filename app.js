@@ -3,6 +3,9 @@ game = {
     rows: 6,
     columns: 7
   },
+  functions: {
+    click: function(){}
+  },
   init: function(){
           for (var i=0; i<game.board.rows; i++) {
             for (var u=0; u<game.board.columns; u++) {
@@ -13,7 +16,7 @@ game = {
             }
           }
         },
-  
+
 }
 
 

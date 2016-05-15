@@ -29,7 +29,7 @@ game = {
                 // check that this either doesnt have a square below it
                 // or that the square below it has a class of red or black
                 // () {
-              console.log("boom");
+              console.log($(this).siblings());
               $(this).addClass(game.currentPlayer.class);
               game.functions.switchPlayer()
             }

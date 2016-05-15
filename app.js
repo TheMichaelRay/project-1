@@ -3,6 +3,14 @@ game = {
     rows: 6,
     columns: 7
   },
+  player1: {
+    score: 0,
+    class: 'black'
+  },
+  player2: {
+    score: 0,
+    class: 'red',
+  },
   functions: {
     click: function(){}
   },

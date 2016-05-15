@@ -7,7 +7,7 @@
 
 footer {
   height: 200px;
-  width: 600px;
+  max-width: 600px;
   margin: auto;
   margin-top: 50px;
 }

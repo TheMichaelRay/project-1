@@ -13,9 +13,6 @@ game = {
   },
   currentPlayer: null,
   mark: null,
-  functions: {
-    click: function(){}
-  },
   init: function(){
           this.currentPlayer = game.player1;
           this.mark = game.currentPlayer.class;
@@ -26,7 +23,10 @@ game = {
                 document.querySelector('#container').innerHTML += '<div class="divider"></div>'
               }
             }
-          }
+          };
+          $('.box').on('click', function(){
+            console.log("boom")
+          });
   },
 
 }

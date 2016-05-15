@@ -1,0 +1,19 @@
+#container {
+  height: 625px;
+  width: 800px;
+  border: 5px solid #666;
+}
+.box {
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: inline-block;
+}
+.divider {
+  height: 100px;
+  width: 16.666px;
+  display: inline-block;
+  box-sizing: border-box;
+}

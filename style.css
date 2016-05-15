@@ -22,7 +22,7 @@ footer {
 
 .divider {
   height: 50px;
-  width: 8.333px;
+  /*width: 8.333px;*/
   display: inline-block;
   box-sizing: border-box;
 }
@@ -47,4 +47,7 @@ footer {
 }
 .black {
   background-color: black;
+}
+.row {
+  margin: 0px;
 }

@@ -11,10 +11,14 @@ game = {
     score: 0,
     class: 'red',
   },
+  currentPlayer: null,
+  mark: null,
   functions: {
     click: function(){}
   },
   init: function(){
+          this.currentPlayer = game.player1;
+          this.mark = game.currentPlayer.class;
           for (var i=0; i<game.board.rows; i++) {
             for (var u=0; u<game.board.columns; u++) {
               document.querySelector('#container').innerHTML += '<div class="box"></div>'
@@ -23,7 +27,7 @@ game = {
               }
             }
           }
-        },
+  },
 
 }
 

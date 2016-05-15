@@ -42,3 +42,9 @@ footer {
   float: right;
   background-color: red;
 }
+.red {
+  background-color: red;
+}
+.black {
+  background-color: black;
+}

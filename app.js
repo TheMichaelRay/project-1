@@ -25,7 +25,10 @@ game = {
             }
           };
           $('.box').on('click', function(){
-            console.log("boom")
+            if (!$(this).hasClass('red') && !$(this).hasClass('black')) {
+              console.log("boom");
+              $(this).addClass(game.currentPlayer.class);
+            }
           });
   },
 

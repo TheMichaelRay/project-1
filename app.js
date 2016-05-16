@@ -105,6 +105,35 @@ game = {
                     if (counter >= 3) {
                       alert('winner')
                     }
+                  },
+    winDiagLeft: function() {
+                    var counter = 0;
+                    var $circle = $(this);
+                    var $downLeft = $($circle.parent().next().children()[$circle.index()]).prev();
+                    var $upRight = $($circle.parent().prev().children()[$circle.index()]).next();
+                    for (var i = 0; i < 3; i ++) {
+                      if ($downLeft.hasClass(game.currentPlayer.class)) {
+                        counter ++;
+                        $circle = $downLeft;
+                        $downLeft = $($circle.parent().next().children()[$circle.index()]).prev();
+                      } else {
+                        $circle = $(this);
+                        break;
+                      }
+                      };
+                    for (var i = 0; i < 3; i ++) {
+                      if ($upRight.hasClass(game.currentPlayer.class)) {
+                        counter ++;
+                        $circle = $upRight;
+                        $upRight = $($circle.parent().prev().children()[$circle.index()]).next();
+                      } else {
+                        break;
+                      }
+                      };
+                    if (counter >= 3) {
+                      alert('winner')
+                    }
+
                     }
   },
   init: function(){
@@ -130,6 +159,7 @@ game = {
           $('.box').on('click', game.functions.move);
           $('.box').on('click', game.functions.winDown);
           $('.box').on('click', game.functions.winAcross);
+          $('.box').on('click', game.functions.winDiagLeft);
           $('.box').on('click', game.functions.winDiagRight);
           $('.box').on('click', game.functions.switchPlayer);
   },

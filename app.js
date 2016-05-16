@@ -1,4 +1,5 @@
 game = {
+  connect: 4,
   board: {
     rows: 6,
     columns: 7
@@ -12,14 +13,15 @@ game = {
     class: 'red',
   },
   currentPlayer: null,
-  mark: null,
+  opponent: null,
   functions: {
     switchPlayer: function(){
-      // fix issue where clicking on filled in circle still ends your turn
       if (game.currentPlayer == game.player1) {
         game.currentPlayer = game.player2;
+        game.opponent = game.player1;
       } else if (game.currentPlayer == game.player2){
         game.currentPlayer = game.player1;
+        game.opponent = game.player2;
       }
     },
     // function to determine whether a player can make a given move or not
@@ -34,7 +36,7 @@ game = {
                 ) {
               // console.log($circle.parent().next().children()[$circle.index()]);
               $circle.addClass(game.currentPlayer.class);
-              // game.functions.switchPlayer()
+              game.functions.switchPlayer()
             }
     },
     winDown: function() {
@@ -42,12 +44,12 @@ game = {
               var $circle = $(this);
               var $down = $circle.parent().next().children()[$circle.index()];
               for (var i = 0; i < 3; i ++)
-                if($($down).hasClass(game.currentPlayer.class)) {
+                if($($down).hasClass(game.opponent.class)) {
                   counter ++;
                   $circle = $down;
                   $down = $($circle).parent().next().children()[$($circle).index()]
                 };
-              if (counter >= 3) {
+              if (counter >= game.connect-1) {
                 alert('winner')
               }
     },
@@ -57,7 +59,7 @@ game = {
                  var $left = $circle.prev();
                  var $right = $circle.next();
                  for (var i = 0; i < 3; i ++) {
-                   if ($left.hasClass(game.currentPlayer.class)) {
+                   if ($left.hasClass(game.opponent.class)) {
                      counter ++;
                      $circle = $left;
                      $left = $circle.prev();
@@ -67,7 +69,7 @@ game = {
                    }
                  };
                  for (var i = 0; i < 3; i++) {
-                   if ($right.hasClass(game.currentPlayer.class)) {
+                   if ($right.hasClass(game.opponent.class)) {
                      counter ++;
                      $circle = $right;
                      $right = $circle.next();
@@ -75,7 +77,7 @@ game = {
                      break;
                    }
                  };
-                 if (counter >= 3) {
+                 if (counter >= game.connect-1) {
                    alert ('winner')
                  }
                },
@@ -85,7 +87,7 @@ game = {
                     var $downRight = $($circle.parent().next().children()[$circle.index()]).next();
                     var $upLeft = $($circle.parent().prev().children()[$circle.index()]).prev();
                     for (var i = 0; i < 3; i ++) {
-                      if ($downRight.hasClass(game.currentPlayer.class)) {
+                      if ($downRight.hasClass(game.opponent.class)) {
                         counter ++;
                         $circle = $downRight;
                         $downRight = $($circle.parent().next().children()[$circle.index()]).next();
@@ -95,7 +97,7 @@ game = {
                       }
                     };
                     for (var i = 0; i < 3; i ++) {
-                      if ($upLeft.hasClass(game.currentPlayer.class)) {
+                      if ($upLeft.hasClass(game.opponent.class)) {
                         counter ++;
                         $circle = $upLeft;
                         $upLeft = $($circle.parent().prev().children()[$circle.index()]).prev();
@@ -103,7 +105,7 @@ game = {
                         break;
                     }
                     };
-                    if (counter >= 3) {
+                    if (counter >= game.connect-1) {
                       alert('winner')
                     }
                   },
@@ -113,7 +115,7 @@ game = {
                     var $downLeft = $($circle.parent().next().children()[$circle.index()]).prev();
                     var $upRight = $($circle.parent().prev().children()[$circle.index()]).next();
                     for (var i = 0; i < 3; i ++) {
-                      if ($downLeft.hasClass(game.currentPlayer.class)) {
+                      if ($downLeft.hasClass(game.opponent.class)) {
                         counter ++;
                         $circle = $downLeft;
                         $downLeft = $($circle.parent().next().children()[$circle.index()]).prev();
@@ -123,7 +125,7 @@ game = {
                       }
                       };
                     for (var i = 0; i < 3; i ++) {
-                      if ($upRight.hasClass(game.currentPlayer.class)) {
+                      if ($upRight.hasClass(game.opponent.class)) {
                         counter ++;
                         $circle = $upRight;
                         $upRight = $($circle.parent().prev().children()[$circle.index()]).next();
@@ -131,7 +133,7 @@ game = {
                         break;
                       }
                       };
-                    if (counter >= 3) {
+                    if (counter >= game.connect-1) {
                       alert('winner')
                     }
 
@@ -139,7 +141,7 @@ game = {
   },
   init: function(){
           this.currentPlayer = game.player1;
-          this.mark = game.currentPlayer.class;
+          this.opponent = game.player2;
           // builds the game board
           // for (var i=0; i<game.board.rows; i++) {
           //   // document.querySelector('#container').innerHTML += '<div class="row"'
@@ -162,7 +164,7 @@ game = {
           $('.box').on('click', game.functions.winAcross);
           $('.box').on('click', game.functions.winDiagLeft);
           $('.box').on('click', game.functions.winDiagRight);
-          $('.box').on('click', game.functions.switchPlayer);
+          // $('.box').on('click', game.functions.switchPlayer);
   },
 
 }

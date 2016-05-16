@@ -49,6 +49,11 @@ game = {
               if (counter === 3) {
                 alert('winner')
               }
+    },
+    winAcross: function() {
+                 var counter = 0;
+                 var $circle = $(this);
+                 console.log($circle.next().hasClass(game.currentPlayer.class))
     }
   },
   init: function(){
@@ -73,6 +78,7 @@ game = {
           // };
           $('.box').on('click', game.functions.move);
           $('.box').on('click', game.functions.winDown);
+          $('.box').on('click', game.functions.winAcross)
           $('.box').on('click', game.functions.switchPlayer);
   },
 

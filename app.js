@@ -6,11 +6,13 @@ game = {
   },
   player1: {
     score: 0,
-    class: 'black'
+    class: 'black',
+    name: "Player One"
   },
   player2: {
     score: 0,
     class: 'red',
+    name: "Player Two"
   },
   currentPlayer: null,
   opponent: null,
@@ -50,7 +52,7 @@ game = {
                   $down = $($circle).parent().next().children()[$($circle).index()]
                 };
               if (counter >= game.connect-1) {
-                alert('winner')
+                alert(game.opponent.name + " has won!")
               }
     },
     winAcross: function() {
@@ -78,7 +80,7 @@ game = {
                    }
                  };
                  if (counter >= game.connect-1) {
-                   alert ('winner')
+                   alert (game.opponent.name + " has won!")
                  }
                },
     winDiagRight: function() {
@@ -106,7 +108,7 @@ game = {
                     }
                     };
                     if (counter >= game.connect-1) {
-                      alert('winner')
+                      alert(game.opponent.name + " has won!")
                     }
                   },
     winDiagLeft: function() {
@@ -134,7 +136,7 @@ game = {
                       }
                       };
                     if (counter >= game.connect-1) {
-                      alert('winner')
+                      alert(game.opponent.name + " has won!")
                     }
 
                     }
@@ -143,28 +145,18 @@ game = {
           this.currentPlayer = game.player1;
           this.opponent = game.player2;
           // builds the game board
-          // for (var i=0; i<game.board.rows; i++) {
-          //   // document.querySelector('#container').innerHTML += '<div class="row"'
-          //   for (var u=0; u<game.board.columns; u++) {
-          //     if (!u) {
-          //       document.querySelector('#container').innerHTML += '<div class="row">';
-          //     }
-          //     document.querySelector('#container').innerHTML += '<div class="box"></div>';
-          //     if (u<game.board.columns-1) {
-          //       document.querySelector('#container').innerHTML += '<div class="divider"></div>'
-          //     };
-          //     if (u == game.board.columns-1) {
-          //       document.querySelector('#container').innerHTML += '</div>'
-          //     };
-          //   };
-          //   // document.querySelector('#container').innerHTML += '</div>';
-          // };
+          for (var i=0; i<game.board.rows; i++) {
+            for (var u=0; u<game.board.columns; u++) {
+              document.querySelector('#container').innerHTML += '<div class="box"></div>';
+            };
+            $('#container').children('.box').wrapAll('<div class="row"></div>')
+            // document.querySelector('#container').innerHTML += '</div>';
+          };
           $('.box').on('click', game.functions.move);
           $('.box').on('click', game.functions.winDown);
           $('.box').on('click', game.functions.winAcross);
           $('.box').on('click', game.functions.winDiagLeft);
           $('.box').on('click', game.functions.winDiagRight);
-          // $('.box').on('click', game.functions.switchPlayer);
   },
 
 }

@@ -41,10 +41,9 @@ game = {
                   $($down).hasClass(game.player1.class) ||
                   $($down).hasClass(game.player2.class))
                 ) {
-              // console.log($circle.parent().next().children()[$circle.index()]);
-              $circle.addClass(game.currentPlayer.class);
-              game.functions.switchPlayer()
-            }
+                    $circle.addClass(game.currentPlayer.class);
+                    game.functions.switchPlayer()
+                  }
     },
     winDown: function() {
               var counter = 0;
@@ -91,10 +90,7 @@ game = {
     winDiagRight: function() {
                     var counter = 0;
                     var $circle = $(this);
-                    // console.log(.hasClass(game.opponent.class));
-                    // var $downRight = $($circle.parent().next().children()[$circle.index()]).next();
                     var $downRight = game.functions.$right(game.functions.$down($circle))
-                    // var $upLeft = $($circle.parent().prev().children()[$circle.index()]).prev();
                     var $upLeft = game.functions.$left(game.functions.$up($circle));
                     for (var i = 0; i < 3; i ++) {
                       if ($downRight.hasClass(game.opponent.class)) {
@@ -158,13 +154,12 @@ game = {
               document.querySelector('#container').innerHTML += '<div class="box"></div>';
             };
             $('#container').children('.box').wrapAll('<div class="row"></div>')
-            // document.querySelector('#container').innerHTML += '</div>';
           };
-          $('.box').on('click', game.functions.move);
-          $('.box').on('click', game.functions.winDown);
-          $('.box').on('click', game.functions.winAcross);
-          $('.box').on('click', game.functions.winDiagLeft);
-          $('.box').on('click', game.functions.winDiagRight);
+          $('.box').click(game.functions.move);
+          $('.box').click(game.functions.winDown);
+          $('.box').click(game.functions.winAcross);
+          $('.box').click(game.functions.winDiagLeft);
+          $('.box').click(game.functions.winDiagRight);
   },
 
 }

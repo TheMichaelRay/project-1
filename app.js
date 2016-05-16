@@ -23,18 +23,27 @@ game = {
     },
     // function to determine whether a player can make a given move or not
     move: function(){
-            // var circle = $(this);
-            var $down = $(this).parent().next().children()[$(this).index()];
-            if (!$(this).hasClass(game.player1.class) &&
-                !$(this).hasClass(game.player2.class) &&
+            var $circle = $(this);
+            var $down = $circle.parent().next().children()[$circle.index()];
+            if (!$circle.hasClass(game.player1.class) &&
+                !$circle.hasClass(game.player2.class) &&
                 (!$down ||
                   $($down).hasClass(game.player1.class) ||
                   $($down).hasClass(game.player2.class))
                 ) {
-              console.log($(this).parent().next().children()[$(this).index()]);
-              $(this).addClass(game.currentPlayer.class);
-              game.functions.switchPlayer()
+              // console.log($circle.parent().next().children()[$circle.index()]);
+              $circle.addClass(game.currentPlayer.class);
+              // game.functions.switchPlayer()
             }
+    },
+    winDown: function() {
+              var counter = 0;
+              var $circle = $(this);
+              var $down = $(this).parent().next().children()[$circle.index()];
+              console.log($($down).hasClass(game.currentPlayer.class))
+              // if ($($down).hasClass(game.currentPlayer.class)) {
+              //   console.log('boom')
+              // }
     }
   },
   init: function(){
@@ -58,6 +67,8 @@ game = {
           //   // document.querySelector('#container').innerHTML += '</div>';
           // };
           $('.box').on('click', game.functions.move);
+          $('.box').on('click', game.functions.winDown);
+          $('.box').on('click', game.functions.switchPlayer)
   },
 
 }

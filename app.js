@@ -15,6 +15,7 @@ game = {
   mark: null,
   functions: {
     switchPlayer: function(){
+      // fix issue where clicking on filled in circle still ends your turn
       if (game.currentPlayer == game.player1) {
         game.currentPlayer = game.player2;
       } else if (game.currentPlayer == game.player2){

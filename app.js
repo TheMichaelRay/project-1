@@ -17,6 +17,7 @@ game = {
   currentPlayer: null,
   opponent: null,
   functions: {
+    // callback functions to traverse DOM to be used within other functions
     $down: function(x){return $(x).parent().next().children()[$(x).index()]},
     $left: function(x){return $(x).prev()},
     $right: function(x){return $(x).next()},
@@ -32,9 +33,8 @@ game = {
     },
     // function to determine whether a player can make a given move or not
     move: function(){
-            console.log(game.functions.$down(this))
             var $circle = $(this);
-            var $down = game.functions.$down();
+            var $down = game.functions.$down($circle);
             if (!$circle.hasClass(game.player1.class) &&
                 !$circle.hasClass(game.player2.class) &&
                 (!$down ||
@@ -49,12 +49,12 @@ game = {
     winDown: function() {
               var counter = 0;
               var $circle = $(this);
-              var $down = $circle.parent().next().children()[$circle.index()];
+              var $down = game.functions.$down($circle);
               for (var i = 0; i < 3; i ++)
                 if($($down).hasClass(game.opponent.class)) {
                   counter ++;
                   $circle = $($down);
-                  $down = $circle.parent().next().children()[$circle.index()]
+                  $down = game.functions.$down($circle);
                 };
               if (counter >= game.connect-1) {
                 alert(game.opponent.name + " has won!")
@@ -63,13 +63,13 @@ game = {
     winAcross: function() {
                  var counter = 0;
                  var $circle = $(this);
-                 var $left = $circle.prev();
-                 var $right = $circle.next();
+                 var $left = game.functions.$left($circle);
+                 var $right = game.functions.$right($circle);
                  for (var i = 0; i < 3; i ++) {
                    if ($left.hasClass(game.opponent.class)) {
                      counter ++;
                      $circle = $left;
-                     $left = $circle.prev();
+                     $left = game.functions.$left($circle);
                    } else {
                      $circle = $(this);
                      break;
@@ -79,7 +79,7 @@ game = {
                    if ($right.hasClass(game.opponent.class)) {
                      counter ++;
                      $circle = $right;
-                     $right = $circle.next();
+                     $right = game.functions.$right($circle);
                    } else {
                      break;
                    }
@@ -91,13 +91,16 @@ game = {
     winDiagRight: function() {
                     var counter = 0;
                     var $circle = $(this);
-                    var $downRight = $($circle.parent().next().children()[$circle.index()]).next();
-                    var $upLeft = $($circle.parent().prev().children()[$circle.index()]).prev();
+                    // console.log(.hasClass(game.opponent.class));
+                    // var $downRight = $($circle.parent().next().children()[$circle.index()]).next();
+                    var $downRight = game.functions.$right(game.functions.$down($circle))
+                    // var $upLeft = $($circle.parent().prev().children()[$circle.index()]).prev();
+                    var $upLeft = game.functions.$left(game.functions.$up($circle));
                     for (var i = 0; i < 3; i ++) {
                       if ($downRight.hasClass(game.opponent.class)) {
                         counter ++;
                         $circle = $downRight;
-                        $downRight = $($circle.parent().next().children()[$circle.index()]).next();
+                        $downRight = game.functions.$right(game.functions.$down($circle));
                       } else {
                         $circle = $(this);
                         break;
@@ -107,7 +110,7 @@ game = {
                       if ($upLeft.hasClass(game.opponent.class)) {
                         counter ++;
                         $circle = $upLeft;
-                        $upLeft = $($circle.parent().prev().children()[$circle.index()]).prev();
+                        $upLeft = game.functions.$left(game.functions.$up($circle));
                     } else {
                         break;
                     }
@@ -119,13 +122,13 @@ game = {
     winDiagLeft: function() {
                     var counter = 0;
                     var $circle = $(this);
-                    var $downLeft = $($circle.parent().next().children()[$circle.index()]).prev();
-                    var $upRight = $($circle.parent().prev().children()[$circle.index()]).next();
+                    var $downLeft = game.functions.$left(game.functions.$down($circle));
+                    var $upRight = game.functions.$right(game.functions.$up($circle));
                     for (var i = 0; i < 3; i ++) {
                       if ($downLeft.hasClass(game.opponent.class)) {
                         counter ++;
                         $circle = $downLeft;
-                        $downLeft = $($circle.parent().next().children()[$circle.index()]).prev();
+                        $downLeft = game.functions.$left(game.functions.$down($circle));
                       } else {
                         $circle = $(this);
                         break;
@@ -135,7 +138,7 @@ game = {
                       if ($upRight.hasClass(game.opponent.class)) {
                         counter ++;
                         $circle = $upRight;
-                        $upRight = $($circle.parent().prev().children()[$circle.index()]).next();
+                        $upRight = game.functions.$right(game.functions.$up($circle));
                       } else {
                         break;
                       }

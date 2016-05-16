@@ -46,7 +46,7 @@ game = {
                   $circle = $down;
                   $down = $($circle).parent().next().children()[$($circle).index()]
                 };
-              if (counter === 3) {
+              if (counter >= 3) {
                 alert('winner')
               }
     },
@@ -74,38 +74,38 @@ game = {
                      break;
                    }
                  };
-                 if (counter === 3) {
+                 if (counter >= 3) {
                    alert ('winner')
                  }
                },
     winDiagRight: function() {
-                   var counter = 0;
-                   var $circle = $(this);
-                   var $downRight = $circle.parent().next().children()[$circle.index()].next();
-                   var $upLeft = $circle.parent().prev().children()[$circle.index()].prev();
-                   for (var i = 0; i < 3; i ++) {
-                     if ($downRight.hasClass(game.currentPlayer.class)) {
-                       counter ++;
-                       $circle = $downRight;
-                       $downRight = $circle.parent().next().children()[$circle.index()].next();
-                     } else {
-                       $circle = $(this);
-                       break;
-                     }
-                   };
-                   for (var i = 0; i < 3; i ++) {
-                     if ($upLeft.hasClass(game.currentPlayer.class)) {
-                       counter ++;
-                       $circle = $upLeft;
-                       $upLeft = $circle.parent().prev().children()[$circle.index()].prev();
-                     } else {
-                       break;
-                     }
-                   };
-                   if (counter === 3) {
-                     alert('winner')
-                   }
-                  }
+                    var counter = 0;
+                    var $circle = $(this);
+                    var $downRight = $($circle.parent().next().children()[$circle.index()]).next();
+                    var $upLeft = $($circle.parent().prev().children()[$circle.index()]).prev();
+                    for (var i = 0; i < 3; i ++) {
+                      if ($downRight.hasClass(game.currentPlayer.class)) {
+                        counter ++;
+                        $circle = $downRight;
+                        $downRight = $($circle.parent().next().children()[$circle.index()]).next();
+                      } else {
+                        $circle = $(this);
+                        break;
+                      }
+                    };
+                    for (var i = 0; i < 3; i ++) {
+                      if ($upLeft.hasClass(game.currentPlayer.class)) {
+                        counter ++;
+                        $circle = $upLeft;
+                        $upLeft = $($circle.parent().prev().children()[$circle.index()]).prev();
+                    } else {
+                        break;
+                    }
+                    };
+                    if (counter >= 3) {
+                      alert('winner')
+                    }
+                    }
   },
   init: function(){
           this.currentPlayer = game.player1;

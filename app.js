@@ -39,11 +39,16 @@ game = {
     winDown: function() {
               var counter = 0;
               var $circle = $(this);
-              var $down = $(this).parent().next().children()[$circle.index()];
-              console.log($($down).hasClass(game.currentPlayer.class))
-              // if ($($down).hasClass(game.currentPlayer.class)) {
-              //   console.log('boom')
-              // }
+              var $down = $circle.parent().next().children()[$circle.index()];
+              for (var i = 0; i < 3; i ++)
+                if($($down).hasClass(game.currentPlayer.class)) {
+                  counter ++;
+                  $circle = $down;
+                  $down = $($circle).parent().next().children()[$($circle).index()]
+                };
+              if (counter === 3) {
+                alert('winner')
+              }
     }
   },
   init: function(){
@@ -68,7 +73,7 @@ game = {
           // };
           $('.box').on('click', game.functions.move);
           $('.box').on('click', game.functions.winDown);
-          $('.box').on('click', game.functions.switchPlayer)
+          $('.box').on('click', game.functions.switchPlayer);
   },
 
 }

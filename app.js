@@ -17,6 +17,10 @@ game = {
   currentPlayer: null,
   opponent: null,
   functions: {
+    $down: function(x){return $(x).parent().next().children()[$(x).index()]},
+    $left: function(x){return $(x).prev()},
+    $right: function(x){return $(x).next()},
+    $up: function(x){return $(x).parent().prev().children()[$(x).index()]},
     switchPlayer: function(){
       if (game.currentPlayer == game.player1) {
         game.currentPlayer = game.player2;
@@ -28,8 +32,9 @@ game = {
     },
     // function to determine whether a player can make a given move or not
     move: function(){
+            console.log(game.functions.$down(this))
             var $circle = $(this);
-            var $down = $circle.parent().next().children()[$circle.index()];
+            var $down = game.functions.$down();
             if (!$circle.hasClass(game.player1.class) &&
                 !$circle.hasClass(game.player2.class) &&
                 (!$down ||
@@ -48,8 +53,8 @@ game = {
               for (var i = 0; i < 3; i ++)
                 if($($down).hasClass(game.opponent.class)) {
                   counter ++;
-                  $circle = $down;
-                  $down = $($circle).parent().next().children()[$($circle).index()]
+                  $circle = $($down);
+                  $down = $circle.parent().next().children()[$circle.index()]
                 };
               if (counter >= game.connect-1) {
                 alert(game.opponent.name + " has won!")

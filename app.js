@@ -53,7 +53,8 @@ game = {
     winAcross: function() {
                  var counter = 0;
                  var $circle = $(this);
-                 console.log($circle.next().hasClass(game.currentPlayer.class))
+                 console.log($circle.next().hasClass(game.currentPlayer.class));
+                 console.log($circle.prev().hasClass(game.currentPlayer.class))
     }
   },
   init: function(){

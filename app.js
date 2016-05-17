@@ -180,6 +180,8 @@ game = {
           // $('.box').click(game.functions.winAcross);
           // $('.box').click(game.functions.winDiagLeft);
           // $('.box').click(game.functions.winDiagRight);
+          $('.player.one').draggable()
+          $('.player.two').draggable()
   },
 
 }

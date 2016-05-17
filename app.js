@@ -90,6 +90,7 @@ game = {
                 },
     // used to switch player turns at the end of each move
     switchPlayer: function(){
+      $('.holder').toggleClass('highlight')
       if (game.currentPlayer == game.player1) {
         game.currentPlayer = game.player2;
         game.opponent = game.player1;
@@ -163,7 +164,8 @@ game = {
             drop: function(){$(this).trigger('click')}
           });
           $('#reset-board').click(game.functions.resetGame);
-          $('#reset-score').click(game.functions.resetScore)
+          $('#reset-score').click(game.functions.resetScore);
+          $('.holder.one').toggleClass('highlight');
   },
 
 }

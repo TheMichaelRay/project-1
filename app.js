@@ -31,81 +31,39 @@ game = {
     $right: function(x){return $(x).next()},
     $up: function(x){return $(x).parent().prev().children()[$(x).index()]},
     // algorithms to check for matches on the board after each turn
-    // winDown: function(x) {
-    //             var counter = 0;
-    //             var $circle = $(x);
-    //             var $down = game.functions.$down($circle);
-    //             for (var i = 0; i < 3; i ++)
-    //               if($($down).hasClass(game.currentPlayer.class)) {
-    //                 counter ++;
-    //                 $circle = $($down);
-    //                 $down = game.functions.$down($circle);
-    //               };
-    //             if (counter >= game.connect-1) {
-    //               game.functions.winner('Vertical')
-    //             }
-    // },
-    // winAcross: function(x) {
-    //              var counter = 0;
-    //              var $circle = $(x);
-    //              var $left = game.functions.$left($circle);
-    //              var $right = game.functions.$right($circle);
-    //              for (var i = 0; i < 3; i ++) {
-    //                if ($left.hasClass(game.currentPlayer.class)) {
-    //                  counter ++;
-    //                  $circle = $left;
-    //                  $left = game.functions.$left($circle);
-    //                } else {
-    //                  $circle = $(x);
-    //                  break;
-    //                }
-    //              };
-    //              for (var i = 0; i < 3; i++) {
-    //                if ($right.hasClass(game.currentPlayer.class)) {
-    //                  counter ++;
-    //                  $circle = $right;
-    //                  $right = game.functions.$right($circle);
-    //                } else {
-    //                  break;
-    //                }
-    //              };
-    //              if (counter >= game.connect-1) {
-    //                game.functions.winner('Horizontal')
-    //              }
-    //            },
-    winCheck: function(x, check1, check2, check3, check4) {
+    winCheck: function(x, dir1, dir2, dir3, dir4) {
                 var counter = 0;
                 var $circle = $(x);
-                var $check1 = $(check1($circle));
-                if (check4){
-                  $check1 = check1(check3($circle));
-                  var $check2 = check2(check4($circle));
-                } else if (check2){
-                  var $check2 = check2($circle)
+                var $check1 = $(dir1($circle));
+                if (dir4){
+                  $check1 = dir1(dir3($circle));
+                  var $check2 = dir2(dir4($circle));
+                } else if (dir2){
+                  var $check2 = dir2($circle)
                 }
                 for (var i = 0; i < 3; i ++) {
                   if ($check1.hasClass(game.currentPlayer.class)) {
                     counter ++;
                     $circle = $check1;
-                    if (check3){
-                      $check1 = check1(check3($circle))
+                    if (dir3){
+                      $check1 = dir1(dir3($circle))
                     } else {
-                      $check1 = $(check1($circle));
+                      $check1 = $(dir1($circle));
                     }
                   } else {
                     $circle = $(x);
                     break;
                   }
                 };
-                if (check2) {
+                if (dir2) {
                   for (var i = 0; i < 3; i ++) {
                     if ($check2.hasClass(game.currentPlayer.class)) {
                       counter ++;
                       $circle = $check2;
-                      if (check4){
-                        $check2 = check2(check4($circle))
+                      if (dir4){
+                        $check2 = dir2(dir4($circle))
                       } else {
-                        $check2 = check2($circle);
+                        $check2 = dir2($circle);
                       }
                     } else {
                         break;
@@ -173,8 +131,6 @@ game = {
                     }
               };
             $circle.addClass(game.currentPlayer.class);
-            // game.functions.winDown($circle);
-            // game.functions.winAcross($circle);
             game.functions.winCheck($circle, game.functions.$down);
             game.functions.winCheck($circle, game.functions.$left, game.functions.$right);
             game.functions.winCheck($circle, game.functions.$left, game.functions.$right, game.functions.$up, game.functions.$down);

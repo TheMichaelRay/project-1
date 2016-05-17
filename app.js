@@ -141,19 +141,28 @@ game = {
     move: function(){
             var $circle = $(this);
             var $down = game.functions.$down($circle);
-            if (!$circle.hasClass(game.player1.class) &&
-                !$circle.hasClass(game.player2.class) &&
-                (!$down ||
-                  $($down).hasClass(game.player1.class) ||
-                  $($down).hasClass(game.player2.class))
-                ) {
-                    $circle.addClass(game.currentPlayer.class);
-                    game.functions.winDown($circle);
-                    game.functions.winAcross($circle);
-                    game.functions.winDiagLeft($circle);
-                    game.functions.winDiagRight($circle);
-                    game.functions.switchPlayer()
-                  }
+            if ($circle.hasClass(game.player1.class) ||
+                $circle.hasClass(game.player2.class)) {
+                  return null;
+                };
+            for (var i = 0; i < game.board.rows; i ++) {
+              if (!$circle.hasClass(game.player1.class) &&
+                  !$circle.hasClass(game.player2.class) &&
+                  (!$down ||
+                    $($down).hasClass(game.player1.class) ||
+                    $($down).hasClass(game.player2.class))) {
+                      break;
+                    } else {
+                      $circle = $($down);
+                      $down = game.functions.$down($circle);
+                    }
+              };
+            $circle.addClass(game.currentPlayer.class);
+            game.functions.winDown($circle);
+            game.functions.winAcross($circle);
+            game.functions.winDiagLeft($circle);
+            game.functions.winDiagRight($circle);
+            game.functions.switchPlayer()
     }
   },
   init: function(){

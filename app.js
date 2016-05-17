@@ -30,18 +30,18 @@ game = {
     $up: function(x){return $(x).parent().prev().children()[$(x).index()]},
     // algorithms to check for matches on the board after each turn
     winDown: function(x) {
-              var counter = 0;
-              var $circle = $(x);
-              var $down = game.functions.$down($circle);
-              for (var i = 0; i < 3; i ++)
-                if($($down).hasClass(game.currentPlayer.class)) {
-                  counter ++;
-                  $circle = $($down);
-                  $down = game.functions.$down($circle);
-                };
-              if (counter >= game.connect-1) {
-                alert(game.currentPlayer.name + " has won!")
-              }
+                var counter = 0;
+                var $circle = $(x);
+                var $down = game.functions.$down($circle);
+                for (var i = 0; i < 3; i ++)
+                  if($($down).hasClass(game.currentPlayer.class)) {
+                    counter ++;
+                    $circle = $($down);
+                    $down = game.functions.$down($circle);
+                  };
+                if (counter >= game.connect-1) {
+                  game.functions.winner('Vertical')
+                }
     },
     winAcross: function(x) {
                  var counter = 0;
@@ -68,37 +68,50 @@ game = {
                    }
                  };
                  if (counter >= game.connect-1) {
-                   alert (game.currentPlayer.name + " has won!")
+                   game.functions.winner('Horizontal')
                  }
                },
     winDiag: function(x, check1, check2) {
-                    var counter = 0;
-                    var $circle = $(x);
-                    var $down = check1(game.functions.$down($circle))
-                    var $up = check2(game.functions.$up($circle));
-                    for (var i = 0; i < 3; i ++) {
-                      if ($down.hasClass(game.currentPlayer.class)) {
-                        counter ++;
-                        $circle = $down;
-                        $down = check1(game.functions.$down($circle));
-                      } else {
-                        $circle = $(x);
-                        break;
-                      }
-                    };
-                    for (var i = 0; i < 3; i ++) {
-                      if ($up.hasClass(game.currentPlayer.class)) {
-                        counter ++;
-                        $circle = $up;
-                        $up = check2(game.functions.$up($circle));
-                    } else {
-                        break;
-                    }
-                    };
-                    if (counter >= game.connect-1) {
-                      alert(game.currentPlayer.name + " has won!")
-                    }
-                  },
+                var counter = 0;
+                var $circle = $(x);
+                var $down = check1(game.functions.$down($circle))
+                var $up = check2(game.functions.$up($circle));
+                for (var i = 0; i < 3; i ++) {
+                  if ($down.hasClass(game.currentPlayer.class)) {
+                    counter ++;
+                    $circle = $down;
+                    $down = check1(game.functions.$down($circle));
+                  } else {
+                    $circle = $(x);
+                    break;
+                  }
+                };
+                for (var i = 0; i < 3; i ++) {
+                  if ($up.hasClass(game.currentPlayer.class)) {
+                    counter ++;
+                    $circle = $up;
+                    $up = check2(game.functions.$up($circle));
+                } else {
+                    break;
+                }
+                };
+                if (counter >= game.connect-1) {
+                  game.functions.winner('Diagonal')
+                }
+              },
+    winner : function(winType){
+               game.currentPlayer.score ++;
+               alert(game.currentPlayer.name + " Has Won By " + winType + '!');
+               game.functions.resetGame()
+             },
+    resetGame: function(){
+                 $('.box').removeClass('black');
+                 $('.box').removeClass('red');
+               },
+    resetScore: function(){
+                  game.player1.score = 0;
+                  game.player2.score = 0;
+                },
     // used to switch player turns at the end of each move
     switchPlayer: function(){
       if (game.currentPlayer == game.player1) {
@@ -144,7 +157,6 @@ game = {
             $circle.addClass(game.currentPlayer.class);
             game.functions.winDown($circle);
             game.functions.winAcross($circle);
-            // game.functions.winDiagLeft($circle);
             game.functions.winDiag($circle, game.functions.$right, game.functions.$left);
             game.functions.winDiag($circle, game.functions.$left, game.functions.$right);
             game.functions.switchPlayer()
@@ -161,13 +173,8 @@ game = {
             $('#container').children('.box').wrapAll('<div class="row"></div>')
           };
           $('.box').click(game.functions.move);
-          // $('.box').click(game.functions.winDown);
-          // $('.box').click(game.functions.winAcross);
-          // $('.box').click(game.functions.winDiagLeft);
-          // $('.box').click(game.functions.winDiagRight);
           $('.player').draggable({
             cursor: 'none',
-            // helper: 'clone',
             handle: 'player',
             revert: true,
             revertDuration: 0

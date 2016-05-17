@@ -114,6 +114,8 @@ game = {
     resetScore: function(){
                   game.player1.score = 0;
                   game.player2.score = 0;
+                  $(game.player1.scoreboard).html(game.player1.score);
+                  $(game.player2.scoreboard).html(game.player2.score)
                 },
     // used to switch player turns at the end of each move
     switchPlayer: function(){

@@ -132,9 +132,21 @@ game = {
       if (game.currentPlayer == game.player1) {
         game.currentPlayer = game.player2;
         game.opponent = game.player1;
+        $('.two').draggable({
+          disabled: false
+        })
+        $('.one').draggable({
+          disabled: true
+        })
       } else if (game.currentPlayer == game.player2){
         game.currentPlayer = game.player1;
         game.opponent = game.player2;
+        $('.one').draggable({
+          disabled: false
+        })
+        $('.two').draggable({
+          disabled: true
+        })
       }
     },
     // determines valid moves, executes them, checks for wins, and switches turns
@@ -180,13 +192,16 @@ game = {
           // $('.box').click(game.functions.winAcross);
           // $('.box').click(game.functions.winDiagLeft);
           // $('.box').click(game.functions.winDiagRight);
-          $('.player').draggable( {
+          $('.player').draggable({
             cursor: 'none',
             // helper: 'clone',
             handle: 'player',
             revert: true
           });
-          $('.box').droppable( {
+          $('.two').draggable({
+            disabled: true
+          })
+          $('.box').droppable({
             accept: '.player',
             drop: function(){$(this).trigger('click')}
           })

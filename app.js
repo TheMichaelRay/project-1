@@ -71,58 +71,30 @@ game = {
                    alert (game.currentPlayer.name + " has won!")
                  }
                },
-    winDiagRight: function(x) {
+    winDiag: function(x, check1, check2) {
                     var counter = 0;
                     var $circle = $(x);
-                    var $downRight = game.functions.$right(game.functions.$down($circle))
-                    var $upLeft = game.functions.$left(game.functions.$up($circle));
+                    var $down = check1(game.functions.$down($circle))
+                    var $up = check2(game.functions.$up($circle));
                     for (var i = 0; i < 3; i ++) {
-                      if ($downRight.hasClass(game.currentPlayer.class)) {
+                      if ($down.hasClass(game.currentPlayer.class)) {
                         counter ++;
-                        $circle = $downRight;
-                        $downRight = game.functions.$right(game.functions.$down($circle));
+                        $circle = $down;
+                        $down = check1(game.functions.$down($circle));
                       } else {
                         $circle = $(x);
                         break;
                       }
                     };
                     for (var i = 0; i < 3; i ++) {
-                      if ($upLeft.hasClass(game.currentPlayer.class)) {
+                      if ($up.hasClass(game.currentPlayer.class)) {
                         counter ++;
-                        $circle = $upLeft;
-                        $upLeft = game.functions.$left(game.functions.$up($circle));
+                        $circle = $up;
+                        $up = check2(game.functions.$up($circle));
                     } else {
                         break;
                     }
                     };
-                    if (counter >= game.connect-1) {
-                      alert(game.currentPlayer.name + " has won!")
-                    }
-                  },
-    winDiagLeft: function(x) {
-                    var counter = 0;
-                    var $circle = $(x);
-                    var $downLeft = game.functions.$left(game.functions.$down($circle));
-                    var $upRight = game.functions.$right(game.functions.$up($circle));
-                    for (var i = 0; i < 3; i ++) {
-                      if ($downLeft.hasClass(game.currentPlayer.class)) {
-                        counter ++;
-                        $circle = $downLeft;
-                        $downLeft = game.functions.$left(game.functions.$down($circle));
-                      } else {
-                        $circle = $(x);
-                        break;
-                      }
-                      };
-                    for (var i = 0; i < 3; i ++) {
-                      if ($upRight.hasClass(game.currentPlayer.class)) {
-                        counter ++;
-                        $circle = $upRight;
-                        $upRight = game.functions.$right(game.functions.$up($circle));
-                      } else {
-                        break;
-                      }
-                      };
                     if (counter >= game.connect-1) {
                       alert(game.currentPlayer.name + " has won!")
                     }
@@ -172,8 +144,9 @@ game = {
             $circle.addClass(game.currentPlayer.class);
             game.functions.winDown($circle);
             game.functions.winAcross($circle);
-            game.functions.winDiagLeft($circle);
-            game.functions.winDiagRight($circle);
+            // game.functions.winDiagLeft($circle);
+            game.functions.winDiag($circle, game.functions.$right, game.functions.$left);
+            game.functions.winDiag($circle, game.functions.$left, game.functions.$right);
             game.functions.switchPlayer()
     }
   },

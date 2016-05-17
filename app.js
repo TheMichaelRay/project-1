@@ -191,7 +191,8 @@ game = {
             accept: '.player',
             drop: function(){$(this).trigger('click')}
           });
-
+          $('#reset-board').click(game.functions.resetGame);
+          $('#reset-score').click(game.functions.resetScore)
   },
 
 }

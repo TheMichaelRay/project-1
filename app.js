@@ -182,9 +182,9 @@ game = {
           // $('.box').click(game.functions.winDiagRight);
           $('.player').draggable( {
             cursor: 'none',
-            helper: 'clone',
+            // helper: 'clone',
             handle: 'player',
-            revert: 'true'
+            revert: true
           });
           $('.box').droppable( {
             accept: '.player',

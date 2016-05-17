@@ -196,7 +196,8 @@ game = {
             cursor: 'none',
             // helper: 'clone',
             handle: 'player',
-            revert: true
+            revert: true,
+            revertDuration: 0
           });
           $('.two').draggable({
             disabled: true

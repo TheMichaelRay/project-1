@@ -10,12 +10,14 @@ game = {
   player1: {
     score: 0,
     class: 'black',
-    name: "Player One"
+    name: "Player One",
+    scoreboard: '#player-one-score span'
   },
   player2: {
     score: 0,
     class: 'red',
-    name: "Player Two"
+    name: "Player Two",
+    scoreboard: '#player-two-score span'
   },
   // currentPlayer used in wincheck and move functions
   currentPlayer: null,
@@ -101,6 +103,7 @@ game = {
               },
     winner : function(winType){
                game.currentPlayer.score ++;
+               $(game.currentPlayer.scoreboard).html(game.currentPlayer.score)
                alert(game.currentPlayer.name + " Has Won By " + winType + '!');
                game.functions.resetGame()
              },
@@ -185,7 +188,8 @@ game = {
           $('.box').droppable({
             accept: '.player',
             drop: function(){$(this).trigger('click')}
-          })
+          });
+
   },
 
 }

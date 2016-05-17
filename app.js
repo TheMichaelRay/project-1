@@ -180,8 +180,16 @@ game = {
           // $('.box').click(game.functions.winAcross);
           // $('.box').click(game.functions.winDiagLeft);
           // $('.box').click(game.functions.winDiagRight);
-          $('.player.one').draggable()
-          $('.player.two').draggable()
+          $('.player').draggable( {
+            cursor: 'none',
+            helper: 'clone',
+            handle: 'player',
+            revert: 'true'
+          });
+          $('.box').droppable( {
+            accept: '.player',
+            drop: function(){$(this).trigger('click')}
+          })
   },
 
 }

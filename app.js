@@ -148,10 +148,10 @@ game = {
                   $($down).hasClass(game.player2.class))
                 ) {
                     $circle.addClass(game.currentPlayer.class);
-                    game.functions.winDown(this);
-                    game.functions.winAcross(this);
-                    game.functions.winDiagLeft(this);
-                    game.functions.winDiagRight(this);
+                    game.functions.winDown($circle);
+                    game.functions.winAcross($circle);
+                    game.functions.winDiagLeft($circle);
+                    game.functions.winDiagRight($circle);
                     game.functions.switchPlayer()
                   }
     }

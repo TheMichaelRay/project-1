@@ -31,7 +31,7 @@ game = {
     $right: function(x){return $(x).next()},
     $up: function(x){return $(x).parent().prev().children()[$(x).index()]},
     // algorithms to check for matches on the board after each turn
-    winCheck: function(x, dir1, dir2, dir3, dir4) {
+    winCheck: function(type, x, dir1, dir2, dir3, dir4) {
                 var counter = 0;
                 var $circle = $(x);
                 var $check1 = $(dir1($circle));
@@ -71,7 +71,7 @@ game = {
                   };
                 }
                 if (counter >= game.connect-1) {
-                  game.functions.winner('Diagonal')
+                  game.functions.winner(type)
                 }
               },
     winner : function(winType){
@@ -85,8 +85,8 @@ game = {
                  $('.box').removeClass('red');
                },
     resetScore: function(){
-                  $(game.player1.scoreboard).html(function(){return game.player1.score ++});
-                  $(game.player2.scoreboard).html(function(){return game.player2.score ++})
+                  $(game.player1.scoreboard).html(function(){return game.player1.score = 0});
+                  $(game.player2.scoreboard).html(function(){return game.player2.score = 0})
                 },
     // used to switch player turns at the end of each move
     switchPlayer: function(){
@@ -131,10 +131,10 @@ game = {
                     }
               };
             $circle.addClass(game.currentPlayer.class);
-            game.functions.winCheck($circle, game.functions.$down);
-            game.functions.winCheck($circle, game.functions.$left, game.functions.$right);
-            game.functions.winCheck($circle, game.functions.$left, game.functions.$right, game.functions.$up, game.functions.$down);
-            game.functions.winCheck($circle, game.functions.$right, game.functions.$left, game.functions.$up, game.functions.$down);
+            game.functions.winCheck('Vertical', $circle, game.functions.$down);
+            game.functions.winCheck('Horizontal', $circle, game.functions.$left, game.functions.$right);
+            game.functions.winCheck('Diagonal', $circle, game.functions.$left, game.functions.$right, game.functions.$up, game.functions.$down);
+            game.functions.winCheck('Diagonal', $circle, game.functions.$right, game.functions.$left, game.functions.$up, game.functions.$down);
             game.functions.switchPlayer()
     }
   },
@@ -158,7 +158,7 @@ game = {
           $('.two').draggable({
             disabled: true
           })
-          $('.box').droppable({
+          $('.row').first().children().droppable({
             accept: '.player',
             drop: function(){$(this).trigger('click')}
           });

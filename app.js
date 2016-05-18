@@ -135,13 +135,17 @@ game = {
             $('.inner').addClass(game.currentPlayer.class);
             $('.inner').animate({top: $circle.offset().top - $(this).offset().top},
                                 200,
-                                "easeInQuad")
-            $circle.addClass(game.currentPlayer.class);
-            game.functions.winCheck('Vertical', $circle, game.functions.$down);
-            game.functions.winCheck('Horizontal', $circle, game.functions.$left, game.functions.$right);
-            game.functions.winCheck('Diagonal', $circle, game.functions.$left, game.functions.$right, game.functions.$up, game.functions.$down);
-            game.functions.winCheck('Diagonal', $circle, game.functions.$right, game.functions.$left, game.functions.$up, game.functions.$down);
-            game.functions.switchPlayer()
+                                "easeInQuad",
+                                function(){
+                                  $circle.addClass(game.currentPlayer.class);
+                                  $('.inner').remove()
+                                  game.functions.winCheck('Vertical', $circle, game.functions.$down);
+                                  game.functions.winCheck('Horizontal', $circle, game.functions.$left, game.functions.$right);
+                                  game.functions.winCheck('Diagonal', $circle, game.functions.$left, game.functions.$right, game.functions.$up, game.functions.$down);
+                                  game.functions.winCheck('Diagonal', $circle, game.functions.$right, game.functions.$left, game.functions.$up, game.functions.$down);
+                                  game.functions.switchPlayer()
+
+                                })
     }
   },
   init: function(){

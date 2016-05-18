@@ -170,7 +170,7 @@ game = {
           $('.player .two').draggable({
             disabled: true
           })
-          $('.row').first().children().droppable({
+          $('.box').droppable({
             accept: '.player',
             drop: function(){$(this).trigger('click')}
           });

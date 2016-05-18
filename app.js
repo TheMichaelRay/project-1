@@ -74,6 +74,9 @@ game = {
                 }
                 if (counter >= game.connect-1) {
                   game.functions.winner(type)
+                } else if (($('.red').length + $('.black').length) - (game.board.rows * game.board.columns) === 0) {
+                  alert('Tie Game!');
+                  game.functions.resetGame();
                 }
               },
     winner : function(winType){
@@ -137,7 +140,7 @@ game = {
             $(this).html('<div class="inner"></div>');
             $('.inner').addClass(game.currentPlayer.class);
             $('.inner').animate({top: $circle.offset().top - $(this).offset().top},
-                                1000,
+                                400,
                                 "easeOutBounce",
                                 function(){
                                   $circle.addClass(game.currentPlayer.class);

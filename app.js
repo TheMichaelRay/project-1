@@ -94,19 +94,19 @@ game = {
       if (game.currentPlayer == game.player1) {
         game.currentPlayer = game.player2;
         game.opponent = game.player1;
-        $('.two').draggable({
+        $('.player .two').draggable({
           disabled: false
         })
-        $('.one').draggable({
+        $('.player .one').draggable({
           disabled: true
         })
       } else if (game.currentPlayer == game.player2){
         game.currentPlayer = game.player1;
         game.opponent = game.player2;
-        $('.one').draggable({
+        $('.player .one').draggable({
           disabled: false
         })
-        $('.two').draggable({
+        $('.player .two').draggable({
           disabled: true
         })
       }
@@ -131,6 +131,7 @@ game = {
                       $down = game.functions.$down($circle);
                     }
               };
+            $('.box').off('click', game.functions.move)
             $(this).html('<div class="inner"></div>');
             $('.inner').addClass(game.currentPlayer.class);
             $('.inner').animate({top: $circle.offset().top - $(this).offset().top},
@@ -144,7 +145,7 @@ game = {
                                   game.functions.winCheck('Diagonal', $circle, game.functions.$left, game.functions.$right, game.functions.$up, game.functions.$down);
                                   game.functions.winCheck('Diagonal', $circle, game.functions.$right, game.functions.$left, game.functions.$up, game.functions.$down);
                                   game.functions.switchPlayer()
-
+                                  $('.box').click(game.functions.move)
                                 })
     }
   },
@@ -161,11 +162,10 @@ game = {
           $('.box').click(game.functions.move);
           $('.player').draggable({
             cursor: 'none',
-            handle: 'player',
             revert: true,
             revertDuration: 0
           });
-          $('.two').draggable({
+          $('.player .two').draggable({
             disabled: true
           })
           $('.row').first().children().droppable({

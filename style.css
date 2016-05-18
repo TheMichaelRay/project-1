@@ -1,3 +1,6 @@
+html {
+  font-family: 'Catamaran', sans-serif;
+}
 #container {
   height: 384px;
   width: 450px;

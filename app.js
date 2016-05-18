@@ -137,7 +137,7 @@ game = {
             $(this).html('<div class="inner"></div>');
             $('.inner').addClass(game.currentPlayer.class);
             $('.inner').animate({top: $circle.offset().top - $(this).offset().top},
-                                400,
+                                1000,
                                 "easeOutBounce",
                                 function(){
                                   $circle.addClass(game.currentPlayer.class);

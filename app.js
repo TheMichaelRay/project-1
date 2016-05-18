@@ -96,19 +96,19 @@ game = {
       if (game.currentPlayer == game.player1) {
         game.currentPlayer = game.player2;
         game.opponent = game.player1;
-        $('.player .two').draggable({
+        $('.player.two').draggable({
           disabled: false
         })
-        $('.player .one').draggable({
+        $('.player.one').draggable({
           disabled: true
         })
       } else if (game.currentPlayer == game.player2){
         game.currentPlayer = game.player1;
         game.opponent = game.player2;
-        $('.player .one').draggable({
+        $('.player.one').draggable({
           disabled: false
         })
-        $('.player .two').draggable({
+        $('.player.two').draggable({
           disabled: true
         })
       }
@@ -167,7 +167,7 @@ game = {
             revert: true,
             revertDuration: 0
           });
-          $('.player .two').draggable({
+          $('.player.two').draggable({
             disabled: true
           })
           $('.box').droppable({

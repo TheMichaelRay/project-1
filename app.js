@@ -131,6 +131,11 @@ game = {
                       $down = game.functions.$down($circle);
                     }
               };
+            $(this).html('<div class="inner"></div>');
+            $('.inner').addClass(game.currentPlayer.class);
+            $('.inner').animate({top: $circle.offset().top - $(this).offset().top},
+                                200,
+                                "easeInQuad")
             $circle.addClass(game.currentPlayer.class);
             game.functions.winCheck('Vertical', $circle, game.functions.$down);
             game.functions.winCheck('Horizontal', $circle, game.functions.$left, game.functions.$right);

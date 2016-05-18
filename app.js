@@ -11,13 +11,15 @@ game = {
     score: 0,
     class: 'black',
     name: "Player One",
-    scoreboard: '#player-one-score span'
+    scoreboard: '#player-one-score span',
+    icon: '.player .one'
   },
   player2: {
     score: 0,
     class: 'red',
     name: "Player Two",
-    scoreboard: '#player-two-score span'
+    scoreboard: '#player-two-score span',
+    icon: '.player .two'
   },
   // currentPlayer used in wincheck and move functions
   currentPlayer: null,
@@ -30,40 +32,40 @@ game = {
     $left: function(x){return $(x).prev()},
     $right: function(x){return $(x).next()},
     $up: function(x){return $(x).parent().prev().children()[$(x).index()]},
-    // algorithms to check for matches on the board after each turn
-    winCheck: function(type, x, dir1, dir2, dir3, dir4) {
+    // algorithm to check for matches on the board after each turn
+    winCheck: function(type, origin, directions) {
                 var counter = 0;
-                var $circle = $(x);
-                var $check1 = $(dir1($circle));
-                if (dir4){
-                  $check1 = dir1(dir3($circle));
-                  var $check2 = dir2(dir4($circle));
-                } else if (dir2){
-                  var $check2 = dir2($circle)
+                var $circle = $(origin);
+                var $check1 = $(directions.dir1($circle));
+                if (directions.dir4){
+                  $check1 = directions.dir1(directions.dir3($circle));
+                  var $check2 = directions.dir2(directions.dir4($circle));
+                } else if (directions.dir2){
+                  var $check2 = directions.dir2($circle)
                 }
                 for (var i = 0; i < 3; i ++) {
                   if ($check1.hasClass(game.currentPlayer.class)) {
                     counter ++;
                     $circle = $check1;
-                    if (dir3){
-                      $check1 = dir1(dir3($circle))
+                    if (directions.dir3){
+                      $check1 = directions.dir1(directions.dir3($circle))
                     } else {
-                      $check1 = $(dir1($circle));
+                      $check1 = $(directions.dir1($circle));
                     }
                   } else {
-                    $circle = $(x);
+                    $circle = $(origin);
                     break;
                   }
                 };
-                if (dir2) {
+                if (directions.dir2) {
                   for (var i = 0; i < 3; i ++) {
                     if ($check2.hasClass(game.currentPlayer.class)) {
                       counter ++;
                       $circle = $check2;
-                      if (dir4){
-                        $check2 = dir2(dir4($circle))
+                      if (directions.dir4){
+                        $check2 = directions.dir2(directions.dir4($circle))
                       } else {
-                        $check2 = dir2($circle);
+                        $check2 = directions.dir2($circle);
                       }
                     } else {
                         break;
@@ -140,10 +142,10 @@ game = {
                                 function(){
                                   $circle.addClass(game.currentPlayer.class);
                                   $('.inner').remove()
-                                  game.functions.winCheck('Vertical', $circle, game.functions.$down);
-                                  game.functions.winCheck('Horizontal', $circle, game.functions.$left, game.functions.$right);
-                                  game.functions.winCheck('Diagonal', $circle, game.functions.$left, game.functions.$right, game.functions.$up, game.functions.$down);
-                                  game.functions.winCheck('Diagonal', $circle, game.functions.$right, game.functions.$left, game.functions.$up, game.functions.$down);
+                                  game.functions.winCheck('Vertical', $circle, {dir1: game.functions.$down});
+                                  game.functions.winCheck('Horizontal', $circle, {dir1: game.functions.$left, dir2: game.functions.$right});
+                                  game.functions.winCheck('Diagonal', $circle, {dir1: game.functions.$left, dir2: game.functions.$right, dir3: game.functions.$up, dir4: game.functions.$down});
+                                  game.functions.winCheck('Diagonal', $circle, {dir1: game.functions.$right, dir2: game.functions.$left, dir3: game.functions.$up, dir4: game.functions.$down});
                                   game.functions.switchPlayer()
                                   $('.box').click(game.functions.move)
                                 })

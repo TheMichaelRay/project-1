@@ -86,12 +86,22 @@ game = {
                game.functions.resetGame()
              },
     resetGame: function(){
+                 $('.red').html('<div class="inner red"></div>')
+                 $('.black').html('<div class="inner black"></div>')
                  $('.box').removeClass('black');
                  $('.box').removeClass('red');
-               },
+                 $('.inner').each(function(index){
+                                   $(this).animate(
+                                                {top: 566 - $(this).offset().top},
+                                                300,
+                                                "easeOutBounce",
+                                                function(){$(this).remove()}
+                                                )
+                                  })
+                },
     resetScore: function(){
                   $(game.player1.scoreboard).html(function(){return game.player1.score = 0});
-                  $(game.player2.scoreboard).html(function(){return game.player2.score = 0})
+                  $(game.player2.scoreboard).html(function(){return game.player2.score = 0});
                 },
     // used to switch player turns at the end of each move
     switchPlayer: function(){

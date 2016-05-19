@@ -36,8 +36,12 @@ game = {
     $up: function(x){return $(x).parent().prev().children()[$(x).index()]},
     // algorithm to check for matches on the board after each turn
     winCheck: function(type, origin, directions) {
+                if (game.winner) {
+                  return null
+                }
                 var counter = 0;
                 var $circle = $(origin);
+                $circle.addClass('winner')
                 var $check1 = $(directions.dir1($circle));
                 if (directions.dir4){
                   $check1 = directions.dir1(directions.dir3($circle));
@@ -48,6 +52,7 @@ game = {
                 for (var i = 0; i < 3; i ++) {
                   if ($check1.hasClass(game.currentPlayer.class)) {
                     counter ++;
+                    $check1.addClass('winner')
                     $circle = $check1;
                     if (directions.dir3){
                       $check1 = directions.dir1(directions.dir3($circle))
@@ -63,6 +68,7 @@ game = {
                   for (var i = 0; i < 3; i ++) {
                     if ($check2.hasClass(game.currentPlayer.class)) {
                       counter ++;
+                      $check2.addClass('winner')
                       $circle = $check2;
                       if (directions.dir4){
                         $check2 = directions.dir2(directions.dir4($circle))
@@ -78,6 +84,9 @@ game = {
                   game.functions.winner(type)
                 } else if (($('.red').length + $('.black').length) - (game.board.rows * game.board.columns) === 0) {
                   $('footer').html("Tie Game! Reset To Play Again!");
+                  $('.box').removeClass('winner')
+                } else {
+                  $('.box').removeClass('winner')
                 }
               },
     winner : function(winType){
@@ -95,6 +104,7 @@ game = {
                  $('.black').html('<div class="inner black"></div>');
                  $('.box').removeClass('black');
                  $('.box').removeClass('red');
+                 $('.box').removeClass('winner');
                  $('.inner').each(function(index){
                                    $(this).animate(
                                                 {top: 566 - $(this).offset().top},

@@ -1,39 +1,30 @@
 html {
   font-family: 'Catamaran', sans-serif;
 }
-body {
-  margin: 0 auto;
-  background-color: rgba(59, 151, 255, 0.68);
+#top {
+  height: 100%;
 }
 h1 {
   text-align: center;
   font-size: 48px;
-  margin: 0 auto;
+  margin: 0;
 }
 header {
-  width: 100%;
-  display: inline-block;
+  max-width: 600px;
   margin: 0 auto;
-  color: white;
+  max-height: 1000px;
 }
 #player-one-score, #player-two-score {
   height: 120px;
   text-align: center;
   font-size: large;
 }
-#middle {
-  width: 100%;
-  background-color: #999;
-  border-top: 5px solid white;
-  border-bottom: 5px solid white;
-}
 #container {
   clear: both;
   height: 384px;
   width: 450px;
-  border: 10px solid rgb(121, 184, 255);
-  margin: 10px auto;
-  background-color: yellow;
+  border: 5px solid #666;
+  margin: auto;
 }
 #player-one-score, #player-two-score, button {
   display: inline-block;
@@ -58,16 +49,14 @@ footer {
   position: relative;
   height: 60px;
   width: 60px;
-  /*border: 1px solid black;*/
+  border: 1px solid black;
   border-radius: 50%;
   box-sizing: border-box;
   display: inline-block;
   margin: 2px;
   float: left;
-  background-color: #999;
 }
 .inner {
-  z-index: 1;
   position: absolute;
   height: 60px;
   width: 60px;

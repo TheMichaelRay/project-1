@@ -16,6 +16,10 @@ header {
   margin: 0 auto;
   color: white;
 }
+#scoreboard {
+  max-width: 600px;
+  margin: 0 auto;
+}
 #player-one-score, #player-two-score {
   height: 120px;
   text-align: center;

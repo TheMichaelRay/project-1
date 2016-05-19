@@ -1,5 +1,6 @@
 html {
   font-family: 'Catamaran', sans-serif;
+  color: white;
 }
 body {
   margin: 0 auto;
@@ -14,7 +15,6 @@ header {
   width: 100%;
   display: inline-block;
   margin: 0 auto;
-  color: white;
 }
 #scoreboard {
   max-width: 600px;
@@ -56,10 +56,9 @@ button {
   font-family: 'catamaran';
 }
 footer {
-  height: 200px;
-  max-width: 600px;
-  margin: auto;
-  margin-top: 50px;
+  text-align: center;
+  font-size: 24px;
+  margin-top: 10px;
 }
 .box {
   position: relative;

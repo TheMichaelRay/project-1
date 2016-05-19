@@ -25,6 +25,8 @@ game = {
   currentPlayer: null,
   // opponent is currently unused and is a placeholder
   opponent: null,
+  // Used to keep win message displayed when there is a winner
+  winner: null,
   // function bank
   functions: {
     // callback functions to traverse DOM to be used within other functions
@@ -75,19 +77,20 @@ game = {
                 if (counter >= game.connect-1) {
                   game.functions.winner(type)
                 } else if (($('.red').length + $('.black').length) - (game.board.rows * game.board.columns) === 0) {
-                  alert('Tie Game!');
-                  game.functions.resetGame();
+                  $('footer').html("Tie Game! Reset To Play Again!");
                 }
               },
     winner : function(winType){
                game.currentPlayer.score ++;
                $(game.currentPlayer.scoreboard).html(game.currentPlayer.score)
-               alert(game.currentPlayer.name + " Has Won By " + winType + '!');
-               game.functions.resetGame()
+               $('footer').html(game.currentPlayer.name + ' Has Won By ' + winType + "! Reset Board To Play Again!")
+               game.winner = game.currentPlayer
+               $('.box').off('click', game.functions.move)
              },
     resetGame: function(){
-                 $('.red').html('<div class="inner red"></div>')
-                 $('.black').html('<div class="inner black"></div>')
+                 game.winner = null;
+                 $('.red').html('<div class="inner red"></div>');
+                 $('.black').html('<div class="inner black"></div>');
                  $('.box').removeClass('black');
                  $('.box').removeClass('red');
                  $('.inner').each(function(index){
@@ -95,13 +98,16 @@ game = {
                                                 {top: 566 - $(this).offset().top},
                                                 300,
                                                 "easeOutBounce",
-                                                function(){$(this).remove()}
-                                                )
+                                                function(){
+                                                  $(this).remove();
+                                                  $('footer').html("New Game! It's " + game.currentPlayer.name + "'s Turn Now!'")
+                                                })
                                   })
                 },
     resetScore: function(){
                   $(game.player1.scoreboard).html(function(){return game.player1.score = 0});
                   $(game.player2.scoreboard).html(function(){return game.player2.score = 0});
+                  $('footer').html("The Score is reset! It's Still " + game.currentPlayer.name + "'s Turn!'")
                 },
     // used to switch player turns at the end of each move
     switchPlayer: function(){
@@ -124,6 +130,9 @@ game = {
         $('.player.two').draggable({
           disabled: true
         })
+      };
+      if (!game.winner) {
+        $('footer').html("It's " + game.currentPlayer.name + "'s Turn!'")
       }
     },
     // determines valid moves, executes them, checks for wins, and switches turns
@@ -153,6 +162,7 @@ game = {
                                 400,
                                 "easeOutBounce",
                                 function(){
+                                  $('.box').click(game.functions.move)
                                   $circle.addClass(game.currentPlayer.class);
                                   $('.inner').remove()
                                   game.functions.winCheck('Vertical', $circle, {dir1: game.functions.$down});
@@ -160,7 +170,6 @@ game = {
                                   game.functions.winCheck('Diagonal', $circle, {dir1: game.functions.$left, dir2: game.functions.$right, dir3: game.functions.$up, dir4: game.functions.$down});
                                   game.functions.winCheck('Diagonal', $circle, {dir1: game.functions.$right, dir2: game.functions.$left, dir3: game.functions.$up, dir4: game.functions.$down});
                                   game.functions.switchPlayer()
-                                  $('.box').click(game.functions.move)
                                 })
     }
   },
@@ -190,6 +199,7 @@ game = {
           $('#reset-board').click(game.functions.resetGame);
           $('#reset-score').click(game.functions.resetScore);
           $('.holder.one').toggleClass('highlight');
+          $('footer').html("Let's play Connect 'em! Player 1 starts!'")
   },
 
 }

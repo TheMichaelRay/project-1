@@ -89,6 +89,7 @@ game = {
              },
     resetGame: function(){
                  game.winner = null;
+                 $('.box').click(game.functions.move)
                  $('.red').html('<div class="inner red"></div>');
                  $('.black').html('<div class="inner black"></div>');
                  $('.box').removeClass('black');

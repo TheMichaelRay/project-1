@@ -47,7 +47,7 @@ Either play it online [here](https://themichaelray.github.io/project-1) or fork 
 --
 * JQuery API Documentation
 * JQuery UI API Documentation
-
+* SoundBible.com
 --
 ###Future Plans
 * Single Player with Computer Moves
@@ -55,7 +55,7 @@ Either play it online [here](https://themichaelray.github.io/project-1) or fork 
 * CSS Masking/Clipping (simulates going between the sandwich boards)
 * Strikethrough Animation for winning connects
 * Multiple game size/mode options
-* Sound Effects
+* More Sound Effects
 * Blitz mode with integrated timer
 * Mobile drag and drop
 * Silhouette on mouse-over

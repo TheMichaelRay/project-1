@@ -48,6 +48,7 @@ Either play it online [here](https://themichaelray.github.io/project-1) or fork 
 * JQuery API Documentation
 * JQuery UI API Documentation
 * SoundBible.com
+
 --
 ###Future Plans
 * Single Player with Computer Moves

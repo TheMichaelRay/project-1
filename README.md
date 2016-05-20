@@ -71,3 +71,4 @@ Either play it online [here](https://themichaelray.github.io/project-1) or fork 
 * Drag and drop helper clone does not work, uses identical placeholder div instead.
 * Chips fall in front of the game board instead of behind it.
 * Does not work as well on mobile or on IE.
+* SFX for chip drop does not work if pressed rapidly

@@ -21,6 +21,10 @@ game = {
     scoreboard: '#player-two-score span',
     icon: '.player .two'
   },
+  sound: {
+    audio: new Audio('piece-drop3.wav'),
+    win: new Audio('ta-da.mp3'),
+  },
   // currentPlayer used in wincheck and move functions
   currentPlayer: null,
   // opponent is currently unused and is a placeholder
@@ -91,6 +95,7 @@ game = {
               },
     winner : function(winType){
                game.currentPlayer.score ++;
+               game.sound.win.play()
                $(game.currentPlayer.scoreboard).html(game.currentPlayer.score)
                $('footer').html(game.currentPlayer.name + ' Has Won By ' + winType + "! Reset Board To Play Again!")
                game.winner = game.currentPlayer
@@ -98,6 +103,7 @@ game = {
              },
     resetGame: function(){
                  game.winner = null;
+                 game.sound.audio.play()
                  $('.box').off('click', game.functions.move)
                  $('.box').click(game.functions.move)
                  $('.red').html('<div class="inner red"></div>');
@@ -170,6 +176,7 @@ game = {
             $('.box').off('click', game.functions.move)
             $(this).html('<div class="inner"></div>');
             $('.inner').addClass(game.currentPlayer.class);
+            game.sound.audio.play()
             $('.inner').animate({top: $circle.offset().top - $(this).offset().top},
                                 400,
                                 "easeOutBounce",

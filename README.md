@@ -1,7 +1,6 @@
 #**WD SM 23 Project 1**
 --
 #Project #1: **Connect 'Em!**
-
 ###A Game of Spatial Reasoning and Additive Real Estate Development
 --
 ![](screencaps/empty.png)
@@ -16,13 +15,13 @@ The object of this game is to take turns placing chips in the game board with th
 --
 ###How May I Play?
 --
-Either play it online [here](https://themichaelray.github.io/project-1) or fork the repository and open index.html in your browser! Keep in mind that the game works best on Chrome and you must be connected to the internet in order for the game to work properly. 
+Either play it online [here](https://themichaelray.github.io/project-1) or fork the repository and open index.html in your browser! Keep in mind that the game works best on Chrome and you must be connected to the internet in order for the game to work properly.
 
 --
 ###Rules
 --
-* Player One is assigned the color black and goes first to start. 
-* Players may only drop one chip per turn and must switch each turn until there is a winner or the entire game board is filled. 
+* Player One is assigned the color black and goes first to start.
+* Players may only drop one chip per turn and must switch each turn until there is a winner or the entire game board is filled.
 * Since the board is standing vertically, you may only place chips on the bottom or directly above another chip (i.e., gravity is in play)
 * Drop a chip on the game board by either dragging and dropping your piece or clicking on the board itself
 
@@ -52,10 +51,10 @@ Either play it online [here](https://themichaelray.github.io/project-1) or fork 
 --
 ###Future Plans
 * Single Player with Computer Moves
-* Integrate smoother animations (chips bumping into eachother on reset)
-* CSS Masking/Clipping (simulates going between the sandwhich boards)
+* Integrate smoother animations (chips bumping into each other on reset)
+* CSS Masking/Clipping (simulates going between the sandwich boards)
 * Strikethrough Animation for winning connects
-* Multiple game size/mode options 
+* Multiple game size/mode options
 * Sound Effects
 * Blitz mode with integrated timer
 * Mobile drag and drop
@@ -65,12 +64,9 @@ Either play it online [here](https://themichaelray.github.io/project-1) or fork 
 --
 ###Known Bugs
 --
-* Redundancy in CSS
-* Gameboard breaks if the window is too small
-* Drag and drop does not work on mobile devices
-* Drag and drop helper clone does not work, uses identical placeholder div instead
-* Chips fall in front of the game board instead of behind it
-              
-
-
-               
+* Redundancy in CSS.
+* Gameboard breaks if the window is too small.
+* Drag and drop does not work on mobile devices.
+* Drag and drop helper clone does not work, uses identical placeholder div instead.
+* Chips fall in front of the game board instead of behind it.
+* Does not work as well on mobile or on IE.

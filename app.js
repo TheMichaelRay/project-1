@@ -112,14 +112,14 @@ game = {
                                                 "easeOutBounce",
                                                 function(){
                                                   $(this).remove();
-                                                  $('footer').html("New Game! It's " + game.currentPlayer.name + "'s Turn Now!'")
+                                                  $('footer').html("New Game! It's " + game.currentPlayer.name + "'s Turn Now!")
                                                 })
                                   })
                 },
     resetScore: function(){
                   $(game.player1.scoreboard).html(function(){return game.player1.score = 0});
                   $(game.player2.scoreboard).html(function(){return game.player2.score = 0});
-                  $('footer').html("The Score is reset! It's Still " + game.currentPlayer.name + "'s Turn!'")
+                  $('footer').html("The Score is reset! It's Still " + game.currentPlayer.name + "'s Turn!")
                 },
     // used to switch player turns at the end of each move
     switchPlayer: function(){
@@ -144,7 +144,7 @@ game = {
         })
       };
       if (!game.winner) {
-        $('footer').html("It's " + game.currentPlayer.name + "'s Turn!'")
+        $('footer').html("It's " + game.currentPlayer.name + "'s Turn!")
       }
     },
     // determines valid moves, executes them, checks for wins, and switches turns
@@ -211,7 +211,7 @@ game = {
           $('#reset-board').click(game.functions.resetGame);
           $('#reset-score').click(game.functions.resetScore);
           $('.holder.one').toggleClass('highlight');
-          $('footer').html("Let's play Connect 'em! Player 1 starts!'")
+          $('footer').html("Let's play Connect 'em! Player 1 starts!")
   },
 
 }

@@ -21,6 +21,7 @@ game = {
     scoreboard: '#player-two-score span',
     icon: '.player .two'
   },
+  // bank for sound effects for moves and wins
   sound: {
     audio: new Audio('piece-drop3.wav'),
     win: new Audio('ta-da.mp3'),
